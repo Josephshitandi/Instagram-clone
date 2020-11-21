@@ -7,6 +7,11 @@ from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField(blank=True)
+    photo = CloudinaryField('image')
+
 
 class Image(models.Model):
     image = CloudinaryField('image')
