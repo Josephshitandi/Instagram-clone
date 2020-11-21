@@ -21,3 +21,9 @@ class Image(models.Model):
     Author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     author_profile = models.ForeignKey(Profile,on_delete=models.CASCADE, blank=True, default='1')
     likes = models.ManyToManyField(User, related_name = 'likes', blank = True)
+    
+class Comment(models.Model):
+    comment = models.TextField(blank=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+    pub_date = models.DateTimeField(auto_now_add=True)
