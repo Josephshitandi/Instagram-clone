@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram</title>
-</head>
-<body>
-    <P><center>{{date}}</center></P>
+{%extends 'base.html'%}
+{% load bootstrap3 %}
+{% block content %}
+{{ block.super}}
+<div class="container-fluid">
     <h2>WELCOME TO INSTAGRAM CLONE</h2>
-</body>
-</html>
+</div>
+{% endblock %}
