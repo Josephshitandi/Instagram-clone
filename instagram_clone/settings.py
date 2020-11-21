@@ -39,6 +39,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django_registration',
     'instagram.apps.InstagramConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -171,6 +172,9 @@ cloudinary.config(
   api_key = "196555619145763", 
   api_secret = "VcygnY36KpV5lamDJolQgBcY334" 
 )
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 
 django_heroku.settings(locals())
