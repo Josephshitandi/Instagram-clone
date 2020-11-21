@@ -9,7 +9,9 @@ from .forms import NewPostForm
 def index(request):
     date = dt.date.today()
     images = Image.objects.all()
-    return render(request, 'home.html', {"date": date,"images":images})
+    users = Profile.objects.all()
+    print("users.......",users)
+    return render(request, 'home.html', {"date": date,"images":images, "users":users})
 
 
 @login_required(login_url='/accounts/login/')
@@ -26,4 +28,24 @@ def new_post(request):
     else:
         form = NewPostForm()
     return render(request, 'new_post.html', {"form": form})
+
+@login_required(login_url='/accounts/login/')
+def profile(request):
+    
+    return render(request, 'profile.html')
+
+def search_results(request):
+
+    if 'article' in request.GET and request.GET["article"]:
+        search_term = request.GET.get("article")
+        searched_articles = Article.search_by_title(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'all-news/search.html',{"message":message,"articles": searched_articles})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'all-news/search.html',{"message":message})
+    
+    
 
