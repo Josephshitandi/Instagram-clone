@@ -10,7 +10,7 @@ urlpatterns =[
     # re_path('archives/(\d{4}-\d{2}-\d{2})/$',views.past_days_news,name = 'pastNews'),
     # path('article/(\d+)',views.article,name ='article'),
     path('new/post', views.new_post, name='new_post'),
-    path('accounts/profile', views.Profile, name='profile')
+    path('accounts/profile', views.new_profile, name='new_profile')
     
 ]
 if settings.DEBUG:

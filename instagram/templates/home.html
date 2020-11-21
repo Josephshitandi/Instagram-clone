@@ -17,7 +17,7 @@
                         <div class="col-md-1">
                             <div class="card-body avat">
 
-                                <img src="{{image.image.url}}" class="card-img-top" alt="{{image.Author}}">
+                                <img src="{{image.author_profile.photo.url}}" class="card-img-top" alt="{{image.Author}}">
 
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                 <h3>Suggestions For You</h3>
                 {% for user in users %}
                 <img src="{{user.photo.url}}" class="card-img-top" alt="{{user.user}}">
-                <p>{{user.user}} <button class="btn btn-success">Follow</button> </p>
+                <p> {{user.user}} <button class="btn btn-success">Follow</button> </p>
 
 
 
