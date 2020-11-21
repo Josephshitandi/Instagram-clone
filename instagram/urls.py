@@ -9,7 +9,7 @@ urlpatterns =[
     # path('search/', views.search_results, name='search_results'),
     # re_path('archives/(\d{4}-\d{2}-\d{2})/$',views.past_days_news,name = 'pastNews'),
     # path('article/(\d+)',views.article,name ='article'),
-    # path('new/article', views.new_article, name='new-article')
+    path('new/post', views.new_post, name='new-post')
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
