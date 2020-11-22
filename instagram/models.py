@@ -23,7 +23,7 @@ class Profile(models.Model):
         cls.objects.filter(id=id).update(name = value)
         
     def __str__(self):
-        return self.user 
+        return self.bio 
 
 
 class Image(models.Model):
@@ -83,4 +83,4 @@ class Comment(models.Model):
         cls.objects.filter(id=id).update(name = value)
         
     def __str__(self):
-        return self.author
+        return self.comment
