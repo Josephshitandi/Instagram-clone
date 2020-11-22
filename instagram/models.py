@@ -47,8 +47,14 @@ class Image(models.Model):
         cls.objects.filter(id=id).update(image=value)
     
     @classmethod
-    def get_image_by_id(cls, id):
-        image = cls.objects.filter(id=id).all()
+    def get_image(request, id):
+        try:
+            image = Image.objects.get(pk = id)
+            print(image)
+            
+        except ObjectDoesNotExist:
+            raise Http404()
+        
         return image
     
     @classmethod
@@ -62,6 +68,8 @@ class Image(models.Model):
     
 class Comment(models.Model):
     comment = models.TextField(blank=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE,blank=True)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True)
     
     def save_comment(self):
