@@ -1,5 +1,5 @@
 from django import forms
-from .models import Image,Profile
+from .models import Image,Profile,Comment
 from django_registration.forms import RegistrationForm
 
 # class NewsLetterForm(RegistrationForm):
@@ -15,6 +15,11 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         exclude = ['user']
+        
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        exclude = ['pub_date', 'author', 'image']
         
         
         

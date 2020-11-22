@@ -5,6 +5,9 @@
 <div class="container">
     <div class="row">
         <div class="row">
+            <div class="row">
+                <br><br><br><br>
+            </div>
             <div class="col-md-2">
 
             </div>
@@ -17,7 +20,8 @@
                         <div class="col-md-1">
                             <div class="card-body avat">
 
-                                <img src="{{image.author_profile.photo.url}}" class="card-img-top" alt="{{image.Author}}">
+                                <img src="{{image.author_profile.photo.url}}" class="card-img-top"
+                                    alt="{{image.Author}}">
 
                             </div>
                         </div>
@@ -27,10 +31,19 @@
                     </div>
                     <img src="{{image.image.url}}" class="card-img-top" alt="{{image.image_name}}" height="600px"
                         width="550px">
+                    <div class="">
+                        <li class="list-group-item"> <i class="fas fa-thumbs-up"
+                            (click)="upVote(i)"></i>{{ quote.upvote}} <i class="fas fa-thumbs-down"
+                            (click)="downVote(i)"></i>{{ quote.downvote}}
+                            <button><a href="{%url 'new_comment'%}">Comment</a></button></li>
+
+                    </div>
                     <div class="card-body">
+                       
                         <h5 class="card-title"></h5>
                         <p class="card-text">{{image.description}}</p>
                         <p class="card-text"><small class="text-muted">pdated ~ {{ image.pub_date }}</small></p>
+                        
                     </div>
                 </div>
 
@@ -47,6 +60,7 @@
                 {% for user in users %}
                 <img src="{{user.photo.url}}" class="card-img-top" alt="{{user.user}}">
                 <p> {{user.user}} <button class="btn btn-success">Follow</button> </p>
+                <hr>
 
 
 

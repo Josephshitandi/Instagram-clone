@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light bg-light">
+<nav class="navbar navbar-light bg-light navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="{% url 'newsToday' %}">Instagram clone</a>
@@ -45,7 +45,7 @@
               <a href="/accounts/password_change">Change Password</a>
             </li>
             <li>
-              <a href="/logout">Logout</a>
+              <a href="accounts/logout">Logout</a>
             </li>
           </ul>
         </li>
@@ -57,6 +57,8 @@
 
       {% endif %}
     </div>
+   
 
   </div>
+  <hr>
 </nav>

@@ -3,14 +3,13 @@ from django.http  import HttpResponse,Http404,HttpResponseRedirect
 import datetime as dt
 from django.contrib.auth.decorators import login_required
 from .models import Image,Comment,Profile
-from .forms import NewPostForm,ProfileForm
+from .forms import NewPostForm,ProfileForm,CommentForm
 
 # Create your views here.
 def index(request):
     date = dt.date.today()
     images = Image.objects.all()
     users = Profile.objects.all()
-    print("users.......",users)
     return render(request, 'home.html', {"date": date,"images":images, "users":users})
 
 
@@ -46,16 +45,29 @@ def new_profile(request):
 
 def search_results(request):
 
-    if 'article' in request.GET and request.GET["article"]:
-        search_term = request.GET.get("article")
-        searched_articles = Article.search_by_title(search_term)
-        message = f"{search_term}"
+    if 'Author' in request.GET and request.GET["Author"]:
+        Author = request.GET.get("Author")
+        Author = Image.search_by_author(Author)
+        message = f"{Author}"
 
-        return render(request, 'all-news/search.html',{"message":message,"articles": searched_articles})
+        return render(request, 'search.html',{"message":message,"Author":Author})
 
     else:
         message = "You haven't searched for any term"
-        return render(request, 'all-news/search.html',{"message":message})
+        return render(request, 'search.html',{"message":message})
     
     
+@login_required(login_url='/accounts/login/')
+def new_comment(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = CommentForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.Author = current_user
+            post.save()
+        return redirect('newsToday')
 
+    else:
+        form = CommentForm()
+    return render(request, 'new_comment.html', {"form": form})

@@ -7,10 +7,9 @@ from django.conf.urls.static import static
 urlpatterns =[
     path('', views.index, name = 'newsToday'),
     path('search/', views.search_results, name='search_results'),
-    # re_path('archives/(\d{4}-\d{2}-\d{2})/$',views.past_days_news,name = 'pastNews'),
-    # path('article/(\d+)',views.article,name ='article'),
-    path('new/post', views.new_post, name='new_post'),
-    path('accounts/profile', views.new_profile, name='new_profile')
+    path('new/comment/', views.new_comment, name='new_comment'),
+    path('new/post/', views.new_post, name='new_post'),
+    path('accounts/profile/', views.new_profile, name='new_profile'),
     
 ]
 if settings.DEBUG:
