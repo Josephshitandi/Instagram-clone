@@ -8,6 +8,7 @@ from cloudinary.models import CloudinaryField
 # Create your models here.
 
 class Profile(models.Model):
+    # form.instance.user = Profile.objects.get(user=self.request.user)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(blank=True)
     photo = CloudinaryField('image')
@@ -17,6 +18,17 @@ class Profile(models.Model):
         
     def delete_profile(self):
         self.delete()
+    
+    @classmethod
+    def get_profile(request, id):
+        try:
+            profile = Profile.objects.get(pk = id)
+            print(image)
+            
+        except ObjectDoesNotExist:
+            raise Http404()
+        
+        return profile
         
     @classmethod
     def update_profile(cls, id, value):
@@ -32,7 +44,7 @@ class Image(models.Model):
     description = models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True)
     Author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
-    author_profile = models.ForeignKey(Profile,on_delete=models.CASCADE, blank=True, default='1')
+    author_profile = models.ForeignKey(Profile,on_delete=models.CASCADE, null=True)
     likes = models.ManyToManyField(User, related_name = 'likes', blank = True)
     
     

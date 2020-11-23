@@ -2,9 +2,6 @@ from django import forms
 from .models import Image,Profile,Comment
 from django_registration.forms import RegistrationForm
 
-# class NewsLetterForm(RegistrationForm):
-#     your_name = forms.CharField(label='First Name',max_length=30)
-#     email = forms.EmailField(label='Email')
     
 class NewPostForm(forms.ModelForm):
     class Meta:

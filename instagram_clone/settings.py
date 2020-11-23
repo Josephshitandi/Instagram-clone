@@ -176,5 +176,8 @@ cloudinary.config(
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+LOGOUT_REDIRECT_URL = 'login'
+
+LOGIN_REDIRECT_URL = 'newsToday'
 
 django_heroku.settings(locals())

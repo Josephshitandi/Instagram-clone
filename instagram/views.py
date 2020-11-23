@@ -10,6 +10,7 @@ def index(request):
     date = dt.date.today()
     images = Image.objects.all()
     users = Profile.objects.all()
+    print("images",images)
     
     current_user = request.user 
     if request.method == 'POST':
@@ -50,7 +51,7 @@ def new_profile(request):
         form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
-            post.Author = current_user
+            post.user = current_user
             post.save()
         return redirect('newsToday')
 

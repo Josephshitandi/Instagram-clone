@@ -33,11 +33,10 @@
                         <img src="{{image.image.url}}" class="card-img-top" alt="{{image.image_name}}" height="600px"
                             width="550px">
                         <div class="">
-                            <li class="list-group-item"> <i class="fas fa-thumbs-up"
-                                    (click)="upVote(i)"></i>{{ quote.upvote}} <i class="fas fa-thumbs-down"
-                                    (click)="downVote(i)"></i>{{ quote.downvote}}
+                            <li class="list-group-item"> <i class="far fa-heart"
+                                    (click)="upVote(i)"></i>{{ quote.upvote}}
 
-                                <button><a href="{%url 'new_comment'%}">Comment{{comments}}</a></button></li>
+                                <a href="{%url 'new_comment'%}"><i class="far fa-comment"></i>{{comments}}</a></li>
 
                         </div>
                         <div class="card-body">
