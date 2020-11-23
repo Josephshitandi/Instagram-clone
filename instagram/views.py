@@ -3,7 +3,7 @@ from django.http  import HttpResponse,Http404,HttpResponseRedirect
 import datetime as dt
 from django.contrib.auth.decorators import login_required
 from .models import Image,Comment,Profile
-from .forms import NewPostForm,ProfileForm,CommentForm
+from .forms import NewPostForm,ProfileForm,CommentForm,NewsLetterForm
 
 # Create your views here.
 def index(request):
@@ -13,20 +13,19 @@ def index(request):
     
     current_user = request.user 
     if request.method == 'POST':
-        form = CommentForm(request.POST, auto_id=False)
-        img_id = request.POST['image_id']
+        form = NewsLetterForm(request.POST)
         if form.is_valid():
-            comment = form.save(commit=False)
-            comment.author = current_user
-            image = Image.get_image(img_id)
-            comment.image = image
-            comment.save()
-        return redirect(f'/#{img_id}',)
+            name = form.cleaned_data['your_name']
+            email = form.cleaned_data['email']
+
+            recipient = NewsLetterRecipients(name = name,email = email)
+            recipient.save()
+            send_welcome_email(name,email)
+
+            HttpResponseRedirect('news_today')
     else:
-        form = CommentForm(auto_id=False)
-    # comments = Comment.get_comment_by_id(int(id)).count()
+        form = NewsLetterForm()
     return render(request, 'home.html', {"date": date,"images":images, "users":users, "form": form})
-    # return render(request, 'index.html', {"date": date,"images":images, "form": form, "users":users})
 
 
 @login_required(login_url='/accounts/login/')

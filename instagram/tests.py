@@ -1,21 +1,25 @@
 from django.test import TestCase
 from .models import Image,Comment,Profile
 import datetime as dt
+from django.contrib.auth.models import User
 
 # Create your tests here.
 class ImageTestClass(TestCase):
 
     def setUp(self):
         # Creating a new profile and saving it
-        self.profile = Profile(id=1,user='joseph',bio="programmer")
+        self.joseph = User.objects.create_user('joseph', 'josep@gmail.com', 'josephpass')
+        self.profile = Profile(id=1,user=self.joseph,bio="programmer")
         self.profile.save_profile()
 
-        # Creating a new comment and saving it
-        self.comment = Comment(id=1,image="joseph.jpg",pub_date="08-08-2020",comment="wow",author="joseph")
-        self.comment.save_comment()
+        
 
-        self.new_image= Image(id=1, image_name='image',description="wow",pub_date="20202-08-08",Author=self.profile,author_profile=self.profile,likes="yes")
+        self.new_image= Image(id=1, image_name='image',description="wow",pub_date="20202-08-08",Author=self.joseph,author_profile=self.profile,likes="yes")
         self.new_image.save()
+        
+        # Creating a new comment and saving it
+        self.comment = Comment(id=1,image=self.new_image,pub_date="08-08-2020",comment="wow",author=self.joseph)
+        self.comment.save_comment()
 
         # Testing  instance
     def test_instance(self):
