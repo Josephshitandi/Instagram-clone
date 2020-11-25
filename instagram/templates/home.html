@@ -3,11 +3,9 @@
 {% block content %}
 {{ block.super}}
 <div class="container">
+
     <div class="row">
         <div class="row">
-            <div class="row">
-                <br><br><br><br>
-            </div>
             <div class="col-md-2">
 
             </div>
@@ -37,6 +35,7 @@
                                     (click)="upVote(i)"></i>{{ quote.upvote}}
 
                                 <a href="{%url 'new_comment'%}"><i class="far fa-comment"></i>{{comments}}</a></li>
+                                
 
                         </div>
                         <div class="card-body">
@@ -74,14 +73,14 @@
                 {% endfor %}
                 <div class="container-fluid">
 
-                    <form  action="{%url 'newsToday'%}" method="post">
-                      {%csrf_token%}
-                  
-                      {% bootstrap_form form layout='inline' %}
-                      <input type="submit" value="Subscribe">
+                    <form action="{%url 'newsToday'%}" method="post">
+                        {%csrf_token%}
+
+                        {% bootstrap_form form layout='inline' %}
+                        <input type="submit" value="Subscribe">
                     </form>
-                  
-                  </div>
+
+                </div>
 
             </div>
         </div>

@@ -18,6 +18,7 @@ class Profile(models.Model):
         
     def delete_profile(self):
         self.delete()
+        
     
     @classmethod
     def get_profile(request, id):
@@ -45,7 +46,7 @@ class Image(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
     Author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     author_profile = models.ForeignKey(Profile,on_delete=models.CASCADE, null=True)
-    likes = models.ManyToManyField(User, related_name = 'likes', null = True)
+    likes = models.ManyToManyField(User, related_name = 'likes', blank = True)
     
     
     def save_image(self):
@@ -53,6 +54,9 @@ class Image(models.Model):
     
     def delete_image(self):
         self.delete()
+        
+    def total_likes(self):
+        return self.likes.count()
         
     @classmethod
     def update_image(cls, id, value):

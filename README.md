@@ -3,7 +3,7 @@
 <table>
 <tr>
 <td>
-A personal gallery application that you display my photos for others to see.
+A clone of the website for the popular photo app that people can create account sign in and upload their favourite photos for others to see,like and comment on them.
 </td>
 </tr>
 </table>

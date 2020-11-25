@@ -9,9 +9,9 @@ h1{
     width: 550px;
 }
 .avat>img{
-    border-radius: 60%;
-    height: 50px;
-    width: 60;
+    border-radius: 40%;
+    height: 30px;
+    width: 30;
     display: inline-block;
     clear: left;
 }

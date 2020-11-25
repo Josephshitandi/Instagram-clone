@@ -1,18 +1,22 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.http  import HttpResponse,Http404,HttpResponseRedirect
 import datetime as dt
 from django.contrib.auth.decorators import login_required
 from .models import Image,Comment,Profile
 from .forms import NewPostForm,ProfileForm,CommentForm,NewsLetterForm
+from django.urls import reverse
 
 # Create your views here.
+@login_required(login_url='/accounts/login/')
 def index(request):
     date = dt.date.today()
     images = Image.objects.all()
+    current_user = request.user
     users = Profile.objects.all()
-    print("images",images)
     
-    current_user = request.user 
+    
+    
+    
     if request.method == 'POST':
         form = NewsLetterForm(request.POST)
         if form.is_valid():
@@ -59,6 +63,7 @@ def new_profile(request):
         form = ProfileForm()
     return render(request, 'profile.html', {"form": form})
 
+@login_required(login_url='/accounts/login/')
 def search_results(request):
 
     if 'Author' in request.GET and request.GET["Author"]:
@@ -113,3 +118,13 @@ def get_image(request, id):
         form = CommentForm(auto_id=False)
     
     return render(request, "images.html", {"image":image, "form":form, "comments":comments})
+
+def like_image(request, pk):
+    post= get_object_or_404(Image, id=request.POST.get('post_id'))
+    post.likes.add(request.user)
+    return HttpResponseRedirect(reverse('newsToday', args=[str(pk)]))
+
+
+
+
+
